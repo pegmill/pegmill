@@ -2,11 +2,11 @@
 
 ## Ways to Contribute
 
-**Reporting bugs** — open an [issue](https://github.com/zag/pegmill/issues) on GitHub.
+**Reporting bugs** — open an [issue](https://github.com/pegmill/pegmill/issues) on GitHub.
 Before submitting, search existing issues to avoid duplicates. Include steps to reproduce,
 expected result, and actual result. A minimal grammar + input example is most helpful.
 
-**Requesting features** — open an [issue](https://github.com/zag/pegmill/issues) and
+**Requesting features** — open an [issue](https://github.com/pegmill/pegmill/issues) and
 describe the use case. Check existing requests first.
 
 ## Contributing Code

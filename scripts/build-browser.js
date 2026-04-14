@@ -24,7 +24,7 @@ var HEADER = [
   "/*",
   " * Pegmill " + VERSION,
   " *",
-  " * https://github.com/zag/pegmill",
+  " * https://github.com/pegmill/pegmill",
   " *",
   " * Copyright (c) 2026 Aliaksandr Zahatski",
   " * Licensed under the Apache License 2.0.",

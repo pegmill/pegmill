@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/pegmill"><img src="https://img.shields.io/npm/v/pegmill.svg?color=06B6D4" alt="npm"></a>
-  <a href="https://github.com/zag/pegmill/actions/workflows/ci.yml"><img src="https://github.com/zag/pegmill/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/pegmill/pegmill/actions/workflows/ci.yml"><img src="https://github.com/pegmill/pegmill/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/license-Apache--2.0-06B6D4.svg" alt="License"></a>
 </p>
 

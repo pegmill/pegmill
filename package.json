@@ -15,9 +15,9 @@
     "pegjs",
     "peggy"
   ],
-  "homepage": "https://github.com/zag/pegmill",
+  "homepage": "https://github.com/pegmill/pegmill",
   "bugs": {
-    "url": "https://github.com/zag/pegmill/issues"
+    "url": "https://github.com/pegmill/pegmill/issues"
   },
   "license": "Apache-2.0",
   "author": "Aliaksandr Zahatski",
@@ -31,7 +31,7 @@
   "bin": "bin/pegmill",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zag/pegmill.git"
+    "url": "https://github.com/pegmill/pegmill.git"
   },
   "scripts": {
     "test": "npm run lint && npm run test:spec",

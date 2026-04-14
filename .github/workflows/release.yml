@@ -50,7 +50,7 @@ jobs:
           # Extract the section between ## [VERSION] and the next ## [
           NOTES=$(awk "/^## \[$VERSION\]/{found=1; next} found && /^## \[/{exit} found{print}" CHANGELOG.md)
           if [ -z "$NOTES" ]; then
-            NOTES="See [CHANGELOG.md](https://github.com/zag/pegmill/blob/main/CHANGELOG.md) for details."
+            NOTES="See [CHANGELOG.md](https://github.com/pegmill/pegmill/blob/main/CHANGELOG.md) for details."
           fi
           {
             echo "notes<<EOF"
