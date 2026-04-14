@@ -18,5 +18,5 @@
     font-size="24"
     fill="#64748B"
     text-anchor="middle"
-  >WASM-native PEG parser generator</text>
+  >PEG grammars as LLM output constraints</text>
 </svg>
