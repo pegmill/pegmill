@@ -241,7 +241,21 @@ Parametric grammar rules have been a long-requested feature in the PEG.js ecosys
 
 Pegmill implements all of the above: rule references, inline character classes, quantified expressions, and string literals as template arguments — as a shipping feature in v0.1.0.
 
-## License & Attribution
+## Independence and sponsorship
+
+Pegmill is Apache 2.0. No VC, no corporate sponsor, no equity on anything. Development happens in the maintainer's available time alongside a consulting engagement.
+
+Ways to help:
+
+- Star the [repo](https://github.com/pegmill/pegmill)
+- Link to Pegmill from your own project's docs
+- [GitHub Sponsors](https://github.com/sponsors/zag) for one-off or recurring support
+
+For commercial support, security audits, or grant enquiries, email `zag@cpan.org` or open an issue.
+
+Governance and bus-factor notes live in [GOVERNANCE.md](GOVERNANCE.md).
+
+## License and attribution
 
 Pegmill is licensed under the **Apache License 2.0**.
 

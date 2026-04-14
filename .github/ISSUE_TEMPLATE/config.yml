@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/pegmill/pegmill/blob/main/SECURITY.md
+    about: Please report security issues privately via email, not as a public issue.
+  - name: Question about PEG or grammars
+    url: https://github.com/pegmill/pegmill/discussions
+    about: General discussion belongs in Discussions, not Issues.
