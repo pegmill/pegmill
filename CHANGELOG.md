@@ -11,6 +11,10 @@ Forked from [PEG.js 0.10.0](https://github.com/pegjs/pegjs/blob/master/CHANGELOG
 
 ## [Unreleased]
 
+---
+
+## [0.1.3] — 2026-04-19
+
 ### Added
 - TypeScript declarations at `lib/peg.d.ts` covering the public API:
   `generate`, `GenerateOptions`, `Parser`, `ParseOptions`, `SyntaxError`,
@@ -131,6 +135,8 @@ Forked from [PEG.js 0.10.0](https://github.com/pegjs/pegjs/blob/master/CHANGELOG
   (quadristan, MIT) — reference implementation of template instantiation
 - Related upstream discussion: [peggyjs/peggy#634](https://github.com/peggyjs/peggy/issues/634)
 
-[Unreleased]: https://github.com/zag/pegmill/compare/v0.1.1...HEAD
-[0.1.1]: https://github.com/zag/pegmill/compare/v0.1.0...v0.1.1
-[0.1.0]: https://github.com/zag/pegmill/releases/tag/v0.1.0
+[Unreleased]: https://github.com/pegmill/pegmill/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/pegmill/pegmill/compare/v0.1.2...v0.1.3
+[0.1.2]: https://github.com/pegmill/pegmill/compare/v0.1.1...v0.1.2
+[0.1.1]: https://github.com/pegmill/pegmill/compare/v0.1.0...v0.1.1
+[0.1.0]: https://github.com/pegmill/pegmill/releases/tag/v0.1.0

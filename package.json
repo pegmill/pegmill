@@ -1,6 +1,6 @@
 {
   "name": "pegmill",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "WASM-native PEG parser generator",
   "keywords": [
     "parser generator",
