@@ -69,10 +69,10 @@ Comparable solutions today:
 | Outlines | Python | regex + Lark CFG |
 | LMQL | Python, TS | declarative DSL |
 | llama.cpp GBNF | C++ | BNF extension |
-| XGrammar | C++ with Python bindings | pushdown CFG |
-| Pegmill Phase 4 | TypeScript, WASM | PEG + directive extensions |
+| XGrammar | C++ with Python bindings; JS via emscripten build (not on npm) | pushdown CFG |
+| Pegmill Phase 4 | TypeScript, WASM, `npm install pegmill` | PEG + directive extensions |
 
-Pegmill is the only TypeScript-native PEG option in this space.
+Pegmill is the only install-from-npm PEG option in this space. XGrammar ships TypeScript bindings in-tree, but requires an emsdk build — no published npm package as of this writing.
 
 Planned milestones:
 
