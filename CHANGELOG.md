@@ -19,6 +19,12 @@ Forked from [PEG.js 0.10.0](https://github.com/pegjs/pegjs/blob/master/CHANGELOG
 - `package.json` advertises `types: "lib/peg.d.ts"` so TypeScript consumers
   pick up declarations automatically via `import pegmill from "pegmill"`.
 
+### Changed
+- Browser build switched from `browserify` + `uglify-js` to `esbuild`.
+  Single bundler, faster builds, smaller minified output
+  (`peg-VERSION.min.js` ≈ 118 KB vs. ~140 KB previously).
+- Dropped devDependencies `browserify` and `uglify-js`; added `esbuild`.
+
 ---
 
 ## [0.1.2] — 2026-03-12

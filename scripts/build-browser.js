@@ -1,68 +1,49 @@
 "use strict";
 
 /**
- * Builds browser bundles: browser/peg-VERSION.js (dev) and .min.js (minified).
- * Prepends copyright header. Uses browserify + uglify-js.
+ * Builds browser bundles via esbuild:
+ *   browser/peg-VERSION.js     — dev bundle
+ *   browser/peg-VERSION.min.js — minified bundle
+ *
+ * Both files carry the Apache 2.0 copyright header.
  */
 
-var fs         = require("fs");
-var path       = require("path");
-var cp         = require("child_process");
-var pkg        = require("../package.json");
+var fs      = require("fs");
+var path    = require("path");
+var esbuild = require("esbuild");
+var pkg     = require("../package.json");
 
-var ROOT       = path.join(__dirname, "..");
-var BROWSERIFY = path.join(ROOT, "node_modules", ".bin", "browserify");
-var UGLIFYJS   = path.join(ROOT, "node_modules", ".bin", "uglifyjs");
-var MAIN       = path.join(ROOT, "lib", "peg.js");
-var BROWSER    = path.join(ROOT, "browser");
+var ROOT    = path.join(__dirname, "..");
+var MAIN    = path.join(ROOT, "lib", "peg.js");
+var BROWSER = path.join(ROOT, "browser");
+var DEV     = path.join(BROWSER, "peg-" + pkg.version + ".js");
+var MIN     = path.join(BROWSER, "peg-" + pkg.version + ".min.js");
 
-var VERSION    = pkg.version;
-var DEV        = path.join(BROWSER, "peg-" + VERSION + ".js");
-var MIN        = path.join(BROWSER, "peg-" + VERSION + ".min.js");
-
-var HEADER = [
+var banner = [
   "/*",
-  " * Pegmill " + VERSION,
+  " * Pegmill " + pkg.version,
   " *",
   " * https://github.com/pegmill/pegmill",
   " *",
   " * Copyright (c) 2026 Aliaksandr Zahatski",
   " * Licensed under the Apache License 2.0.",
   " */"
-].join("\n") + "\n";
+].join("\n");
 
-// Ensure browser/ exists
 fs.mkdirSync(BROWSER, { recursive: true });
 
-// Remove old files for this version if present
-[DEV, MIN].forEach(function(f) {
-  if (fs.existsSync(f)) { fs.unlinkSync(f); }
-});
+var common = {
+  entryPoints: [MAIN],
+  bundle:      true,
+  platform:    "browser",
+  globalName:  "peg",
+  target:      "es2015",
+  banner:      { js: banner },
+  legalComments: "inline"
+};
 
-// Step 1: browserify → dev bundle
-var bundleResult = cp.spawnSync(
-  BROWSERIFY,
-  ["--standalone", "peg", MAIN],
-  { encoding: "utf8" }
-);
-
-if (bundleResult.status !== 0) {
-  process.stderr.write(bundleResult.stderr);
-  process.exit(bundleResult.status);
-}
-
-fs.writeFileSync(DEV, HEADER + bundleResult.stdout);
-
-// Step 2: uglify → min bundle
-var uglifyResult = cp.spawnSync(
-  UGLIFYJS,
-  ["--mangle", "--compress", "warnings=false", "--comments", "/Copyright/", "-o", MIN, DEV],
-  { stdio: "inherit" }
-);
-
-if (uglifyResult.status !== 0) {
-  process.exit(uglifyResult.status);
-}
+esbuild.buildSync(Object.assign({}, common, { outfile: DEV }));
+esbuild.buildSync(Object.assign({}, common, { outfile: MIN, minify: true }));
 
 console.log("Built " + path.relative(ROOT, DEV));
 console.log("Built " + path.relative(ROOT, MIN));

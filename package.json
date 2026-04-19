@@ -46,11 +46,10 @@
     "benchmark": "benchmark/run"
   },
   "devDependencies": {
-    "browserify": "13.1.0",
+    "esbuild": "^0.28.0",
     "eslint": "^8.57.1",
     "http-server": "14.1.1",
-    "jasmine": "^5.13.0",
-    "uglify-js": "2.7.0"
+    "jasmine": "^5.13.0"
   },
   "engines": {
     "node": ">=18"
