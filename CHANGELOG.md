@@ -26,6 +26,9 @@ Forked from [PEG.js 0.10.0](https://github.com/pegjs/pegjs/blob/master/CHANGELOG
 - Dropped devDependencies `browserify` and `uglify-js`; added `esbuild`.
 - `prepublishOnly` script rebuilds `lib/parser.js` and runs the test suite
   before every `npm publish`, so a stale generated parser cannot ship.
+- `test:coverage` npm script via `c8` — emits line/branch/function coverage
+  (`coverage/lcov.info` for CI + text summary). `lib/parser.js` excluded
+  (generated). Current baseline: 94% statements, 93% branches.
 
 ---
 

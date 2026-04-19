@@ -6,6 +6,7 @@
   <a href="https://www.npmjs.com/package/pegmill"><img src="https://img.shields.io/npm/v/pegmill.svg?color=06B6D4" alt="npm"></a>
   <a href="https://github.com/pegmill/pegmill/actions/workflows/ci.yml"><img src="https://github.com/pegmill/pegmill/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/license-Apache--2.0-06B6D4.svg" alt="License"></a>
+  <a href="#testing-and-coverage"><img src="https://img.shields.io/badge/coverage-94%25-06B6D4.svg" alt="Coverage"></a>
 </p>
 
 <p align="center">
@@ -219,6 +220,26 @@ Full syntax reference: [`src/parser.pegjs`](src/parser.pegjs)
 - **Node.js**: 18 or later
 - Generated parsers work in any environment where ES5 is available
 - Generated parsers are plain JavaScript (no TypeScript declarations in v0.1.0)
+
+## Testing and coverage
+
+```bash
+npm test              # lint + 1115 specs
+npm run test:coverage # specs with c8 line/branch/function coverage
+```
+
+Current run:
+
+```
+Statements : 94.43% (3003/3180)
+Branches   : 93.36% (366/392)
+Functions  : 95.27% (121/127)
+Lines      : 94.43% (3003/3180)
+```
+
+`npm run test:coverage` writes `coverage/lcov.info` for CI integrations and
+a human-readable summary to stdout. The generated `lib/parser.js` is excluded
+from coverage (it regenerates from `src/parser.pegjs`).
 
 ## Vision
 

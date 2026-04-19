@@ -1,0 +1,13 @@
+{
+  "include": ["lib/**/*.js"],
+  "exclude": [
+    "lib/parser.js",
+    "spec/**",
+    "benchmark/**",
+    "browser/**",
+    "scripts/**"
+  ],
+  "reporter": ["text", "text-summary", "lcov"],
+  "all": true,
+  "check-coverage": false
+}

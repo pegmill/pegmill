@@ -1,3 +1,4 @@
 browser/*
+coverage/
 examples/*.js
 node_modules/*

@@ -38,6 +38,7 @@
   "scripts": {
     "test": "npm run lint && npm run test:spec",
     "test:spec": "node_modules/.bin/jasmine",
+    "test:coverage": "node_modules/.bin/c8 --reporter=text --reporter=text-summary --reporter=lcov node_modules/.bin/jasmine",
     "lint": "node_modules/.bin/eslint lib/**/*.js \"spec/**/*.js\" --ignore-pattern spec/vendor/ benchmark/*.js benchmark/run bin/pegmill",
     "build": "node scripts/build-browser.js",
     "build:parser": "node scripts/build-parser.js",
@@ -47,6 +48,7 @@
     "benchmark": "benchmark/run"
   },
   "devDependencies": {
+    "c8": "^11.0.0",
     "esbuild": "^0.28.0",
     "eslint": "^8.57.1",
     "http-server": "14.1.1",
