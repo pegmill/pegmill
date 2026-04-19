@@ -41,6 +41,7 @@
     "lint": "node_modules/.bin/eslint lib/**/*.js \"spec/**/*.js\" --ignore-pattern spec/vendor/ benchmark/*.js benchmark/run bin/pegmill",
     "build": "node scripts/build-browser.js",
     "build:parser": "node scripts/build-parser.js",
+    "prepublishOnly": "node scripts/build-parser.js && npm run lint && npm run test:spec",
     "clean": "node -e \"require('fs').rmSync('browser',{recursive:true,force:true})\"",
     "serve:spec": "node_modules/.bin/http-server",
     "benchmark": "benchmark/run"

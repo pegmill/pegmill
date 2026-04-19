@@ -24,6 +24,8 @@ Forked from [PEG.js 0.10.0](https://github.com/pegjs/pegjs/blob/master/CHANGELOG
   Single bundler, faster builds, smaller minified output
   (`peg-VERSION.min.js` ≈ 118 KB vs. ~140 KB previously).
 - Dropped devDependencies `browserify` and `uglify-js`; added `esbuild`.
+- `prepublishOnly` script rebuilds `lib/parser.js` and runs the test suite
+  before every `npm publish`, so a stale generated parser cannot ship.
 
 ---
 
