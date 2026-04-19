@@ -11,6 +11,14 @@ Forked from [PEG.js 0.10.0](https://github.com/pegjs/pegjs/blob/master/CHANGELOG
 
 ## [Unreleased]
 
+### Added
+- TypeScript declarations at `lib/peg.d.ts` covering the public API:
+  `generate`, `GenerateOptions`, `Parser`, `ParseOptions`, `SyntaxError`,
+  `GrammarError`, `Location`, and `Tracer`. AST internals remain untyped
+  (scheduled for a later release).
+- `package.json` advertises `types: "lib/peg.d.ts"` so TypeScript consumers
+  pick up declarations automatically via `import pegmill from "pegmill"`.
+
 ---
 
 ## [0.1.2] — 2026-03-12

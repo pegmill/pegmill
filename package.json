@@ -25,9 +25,11 @@
     "bin/pegmill",
     "examples/",
     "lib/**/*.js",
+    "lib/peg.d.ts",
     "NOTICE.md"
   ],
   "main": "lib/peg",
+  "types": "lib/peg.d.ts",
   "bin": "bin/pegmill",
   "repository": {
     "type": "git",
