@@ -151,7 +151,7 @@ Tag<T> = "<" open:T ">" content:$[^<]+ "</" T ">"
 
 ```console
 $ pegmill --version
-pegmill 0.1.2
+pegmill 0.1.3
 
 $ pegmill [options] [--] [<input_file>]
 ```
@@ -218,8 +218,8 @@ Full syntax reference: [`src/parser.pegjs`](src/parser.pegjs)
 ## Compatibility
 
 - **Node.js**: 18 or later
-- Generated parsers work in any environment where ES5 is available
-- Generated parsers are plain JavaScript (no TypeScript declarations in v0.1.0)
+- **TypeScript**: declarations for the public API ship as `lib/peg.d.ts`; `import pegmill from "pegmill"` picks them up automatically
+- Generated parsers are plain JavaScript and work in any environment where the browser bundle's target (ES2015) is available
 
 ## Testing and coverage
 
@@ -241,15 +241,32 @@ Lines      : 94.43% (3003/3180)
 a human-readable summary to stdout. The generated `lib/parser.js` is excluded
 from coverage (it regenerates from `src/parser.pegjs`).
 
-## Vision
+## How Pegmill compares
 
-**v0.1.0** ✅ Parametric grammar rules — write reusable rule templates with `Rule<Param>` syntax
+Constrained decoding works across several ecosystems. Pegmill targets the install-and-go TypeScript path.
 
-**v0.1.3** 🔧 TypeScript declarations, esbuild browser bundle, test coverage (c8)
+| Tool | Runtime | Grammar | Notes |
+|------|---------|---------|-------|
+| [Outlines](https://github.com/dottxt-ai/outlines) | Python | Regex, Lark CFG | Mature, production-ready. Needs a Python runtime in your stack. |
+| [XGrammar](https://github.com/mlc-ai/xgrammar) | C++ / JS (build-from-source) | Pushdown CFG | 14–80× speedup, excellent for server-side batch. JS via emscripten — no npm package yet. |
+| [llama.cpp GBNF](https://github.com/ggml-org/llama.cpp/blob/master/grammars/README.md) | C++ | BNF extension | De facto for local llama.cpp inference. Grammar syntax narrower than PEG. |
+| **Pegmill** | **TypeScript** | **PEG + predicates + lookahead** | `npm install pegmill`, ready in Node, Deno, Bun, or the browser. No Python bridge, no emsdk build step. |
+
+See the [landing page](https://pegmill.github.io/) for the fuller version of this table and roadmap context.
+
+## Roadmap
+
+**v0.1.0** ✅ Parametric grammar rules — reusable rule templates with `Rule<Param>` syntax
+
+**v0.1.3** ✅ TypeScript declarations, esbuild browser bundle, test coverage (c8)
 
 **v0.2.0** 🔜 WASM backend — compile grammars directly to WebAssembly
 
-**v0.3.0** 🔬 LLM constrained decoding — define valid output structure for language models
+**v0.3.0** 🔬 `@dispatch` directive — first-set driven choice for per-token constraint checks
+
+**v0.4.0** 🎯 LLM constrained decoding — PEG grammar as per-token mask for open-weight models (Gemma, GLM, Qwen)
+
+Full roadmap and revisit conditions: [ROADMAP.md](ROADMAP.md).
 
 ## Prior Art & Motivation
 
