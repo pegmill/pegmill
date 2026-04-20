@@ -67,5 +67,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: Pegmill ${{ github.ref_name }}
-          body: ${{ steps.changelog.notes }}
+          body: ${{ steps.changelog.outputs.notes }}
           files: browser/peg-*.js
