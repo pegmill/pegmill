@@ -3,7 +3,8 @@
   "spec_files": [
     "api/**/*.spec.js",
     "behavior/**/*.spec.js",
-    "unit/**/*.spec.js"
+    "unit/**/*.spec.js",
+    "wasm-runtime/**/*.spec.js"
   ],
   "helpers": [
     "helpers.js",

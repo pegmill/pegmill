@@ -1,0 +1,10 @@
+{
+  "env": {
+    "es2020": true,
+    "node": true,
+    "jasmine": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
+  }
+}
