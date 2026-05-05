@@ -11,6 +11,23 @@ Forked from [PEG.js 0.10.0](https://github.com/pegjs/pegjs/blob/master/CHANGELOG
 
 ## [Unreleased]
 
+### Added
+- Experimental wasm code-generation backend, opt-in via `--backend wasm`
+  / `peg.generate(grammar, { backend: "wasm", output: "source" })`.
+  Emits WAT that `lib/wasm-runtime` assembles via
+  [binaryen](https://www.npmjs.com/package/binaryen) (loaded lazily,
+  not required for the default JS backend). Supports the matcher,
+  stack, and position opcodes (`MATCH_STRING`, `MATCH_ANY`,
+  `MATCH_REGEXP` for ASCII char classes, `ACCEPT_STRING`, `ACCEPT_N`,
+  `FAIL`, `PUSH_CURR_POS`, `POP_CURR_POS`, `POP`, `POP_N`, `NIP`).
+  Control-flow opcodes (`IF_*`, `WHILE_NOT_ERROR`, `RULE`, `CALL`)
+  throw `GrammarError` and should keep using the default JS backend.
+- `lib/wasm-runtime/`: WAT prelude (header layout, bump allocator,
+  parse-stack helpers, byte compare) plus a JS shim with
+  `compileGrammar`, `assembleWAT`, `instantiate`, and a synchronous
+  `ParserHandle` (`parse`, `reset`, `setInput`, `inspect`).
+- `binaryen` devDependency (build-time only for the wasm backend).
+
 ---
 
 ## [0.1.3] — 2026-04-19
