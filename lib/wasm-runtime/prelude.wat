@@ -24,6 +24,15 @@
   (global $PAGE_SIZE         i32 (i32.const 0x10000))
   (global $MAX_PAGES         i32 (i32.const 256))
 
+  ;; ---- Parse state (mutable, reset per parse() call) ----------------
+  ;; FAILED is the sentinel value pushed onto the parse stack when a
+  ;; rule fails. Real stack entries are pointers >= HEAP_BASE so the
+  ;; -1 sentinel is unambiguous.
+  (global $FAILED            i32 (i32.const -1))
+  (global $curr_pos          (mut i32) (i32.const 0))
+  (global $stack_bottom      (mut i32) (i32.const 0))
+  (global $stack_top         (mut i32) (i32.const 0))
+
   ;; ---- init ----------------------------------------------------------
   ;; Called once after instantiation, or to reset to clean state.
   ;; Zeroes the header and sets heap_top = heap_base.
@@ -135,6 +144,57 @@
     (i32.load (global.get $OFF_HEAP_TOP)))
   (func $get_pages_grown (export "get_pages_grown") (result i32)
     (i32.load (global.get $OFF_PAGES_GROWN)))
+
+  ;; ---- Parse helpers ------------------------------------------------
+  ;; The parse stack lives in the heap, allocated lazily by the entry
+  ;; point that codegen emits ($parse). These helpers operate on it.
+
+  (func $_stack_push (param $v i32)
+    (i32.store (global.get $stack_top) (local.get $v))
+    (global.set $stack_top
+      (i32.add (global.get $stack_top) (i32.const 4)))
+  )
+
+  (func $_stack_pop (result i32)
+    (global.set $stack_top
+      (i32.sub (global.get $stack_top) (i32.const 4)))
+    (i32.load (global.get $stack_top))
+  )
+
+  ;; Compare $len bytes at the given pointer against input bytes
+  ;; starting at curr_pos. Returns 1 on match, 0 otherwise.
+  ;; Out-of-range curr_pos always returns 0.
+  (func $_bytes_match (param $expected_ptr i32) (param $expected_len i32) (result i32)
+    (local $i i32)
+    (local $input_ptr i32)
+    (local $input_len i32)
+    (local $start i32)
+
+    (local.set $input_ptr (i32.load (global.get $OFF_INPUT_PTR)))
+    (local.set $input_len (i32.load (global.get $OFF_INPUT_LEN)))
+    (local.set $start (global.get $curr_pos))
+
+    (if (i32.gt_u
+          (i32.add (local.get $start) (local.get $expected_len))
+          (local.get $input_len))
+      (then (return (i32.const 0))))
+
+    (local.set $i (i32.const 0))
+    (block $done
+      (loop $L
+        (br_if $done (i32.ge_u (local.get $i) (local.get $expected_len)))
+        (br_if $done
+          (i32.ne
+            (i32.load8_u
+              (i32.add (local.get $input_ptr)
+                       (i32.add (local.get $start) (local.get $i))))
+            (i32.load8_u
+              (i32.add (local.get $expected_ptr) (local.get $i)))))
+        (local.set $i (i32.add (local.get $i) (i32.const 1)))
+        (br $L)))
+
+    (i32.eq (local.get $i) (local.get $expected_len))
+  )
 
   ;; ---- echo (S1 round-trip test) -------------------------------------
   ;; Read input from header, alloc a fresh region, copy bytes there,

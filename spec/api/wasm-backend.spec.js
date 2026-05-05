@@ -22,9 +22,17 @@ describe("Pegmill API — backend option", function() {
   });
 
   describe("when |backend| is \"wasm\"", function() {
-    it("throws a not-implemented error", function() {
+    it("refuses to return a sync parser", function() {
       expect(function() { peg.generate('start = "a"', { backend: "wasm" }); })
-        .toThrowError(/wasm backend is not implemented yet/);
+        .toThrowError(/wasm backend cannot return a sync parser/);
+    });
+
+    it("emits WAT source when |output| is \"source\"", function() {
+      var src = peg.generate('start = "a"', { backend: "wasm", output: "source" });
+      expect(typeof src).toBe("string");
+      expect(src).toContain("(module");
+      expect(src).toContain("(func $rule_start");
+      expect(src).toContain("(func $parse");
     });
   });
 
