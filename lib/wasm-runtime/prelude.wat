@@ -196,6 +196,36 @@
     (i32.eq (local.get $i) (local.get $expected_len))
   )
 
+  ;; Allocate a length-prefixed string struct: [i32 len, $len bytes].
+  ;; Returns the struct pointer (the bytes start at struct_ptr + 4).
+  ;; Used by ACCEPT_N to turn an input slice into a parse-stack value.
+  (func $_alloc_str (param $len i32) (result i32)
+    (local $ptr i32)
+    (local.set $ptr (call $alloc (i32.add (local.get $len) (i32.const 4))))
+    (if (i32.eqz (local.get $ptr))
+      (then (return (i32.const 0))))
+    (i32.store (local.get $ptr) (local.get $len))
+    (local.get $ptr)
+  )
+
+  ;; Copy $len bytes from input[curr_pos..] into a fresh string struct,
+  ;; advance curr_pos by $len, return the struct pointer.
+  (func $_accept_n (param $len i32) (result i32)
+    (local $struct i32)
+    (local $input_ptr i32)
+    (local.set $struct (call $_alloc_str (local.get $len)))
+    (if (i32.eqz (local.get $struct))
+      (then (return (i32.const 0))))
+    (local.set $input_ptr (i32.load (global.get $OFF_INPUT_PTR)))
+    (memory.copy
+      (i32.add (local.get $struct) (i32.const 4))
+      (i32.add (local.get $input_ptr) (global.get $curr_pos))
+      (local.get $len))
+    (global.set $curr_pos
+      (i32.add (global.get $curr_pos) (local.get $len)))
+    (local.get $struct)
+  )
+
   ;; ---- echo (S1 round-trip test) -------------------------------------
   ;; Read input from header, alloc a fresh region, copy bytes there,
   ;; set result_ptr / result_len. Demonstrates: read header, alloc,
