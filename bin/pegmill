@@ -42,6 +42,8 @@ function printHelp() {
   console.log("                                     parser will be allowed to start parsing");
   console.log("                                     from (default: the first rule in the");
   console.log("                                     grammar)");
+  console.log("      --backend <backend>            code-generation backend: js or wasm");
+  console.log("                                     (default: js; wasm is in development)");
   console.log("      --cache                        make generated parser cache results");
   console.log("  -d, --dependency <dependency>      use specified dependency (can be specified");
   console.log("                                     multiple times)");
@@ -132,6 +134,7 @@ var inputFile = null;
 var outputFile = null;
 
 var options = {
+  backend:      "js",
   cache:        false,
   dependencies: {},
   exportVar:    null,
@@ -152,6 +155,17 @@ while (args.length > 0 && isOption(args[0])) {
       options.allowedStartRules = args[0]
         .split(",")
         .map(trim);
+      break;
+
+    case "--backend":
+      nextArg();
+      if (args.length === 0) {
+        abort("Missing parameter of the --backend option.");
+      }
+      if (args[0] !== "js" && args[0] !== "wasm") {
+        abort("Backend must be either \"js\" or \"wasm\".");
+      }
+      options.backend = args[0];
       break;
 
     case "--cache":
