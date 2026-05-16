@@ -281,7 +281,7 @@ Pegmill implements all of the above: rule references, inline character classes, 
 
 ## Independence and sponsorship
 
-Pegmill is Apache 2.0. No VC, no corporate sponsor, no equity on anything. Development happens in the maintainer's available time alongside a consulting engagement.
+Pegmill is Apache 2.0. Independently funded, sustainable through OSS-aligned commercial services. Development happens in the maintainer's available time alongside a consulting engagement.
 
 Ways to help:
 
@@ -289,7 +289,7 @@ Ways to help:
 - Link to Pegmill from your own project's docs
 - [GitHub Sponsors](https://github.com/sponsors/zag) for one-off or recurring support
 
-For commercial support, security audits, or grant enquiries, email `zag@cpan.org` or open an issue.
+For commercial support or grant enquiries, email `hello@pegmill.dev` or open an issue. Security audits — `zag@cpan.org` (per [SECURITY.md](./SECURITY.md)).
 
 Governance and bus-factor notes live in [GOVERNANCE.md](GOVERNANCE.md).
 

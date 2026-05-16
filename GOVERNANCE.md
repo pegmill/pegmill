@@ -7,7 +7,7 @@ Pegmill is a single-maintainer open-source project. This file is the honest vers
 - Maintainer: [Aliaksandr Zahatski](https://github.com/zag), contact `zag@cpan.org`
 - Bus factor: 1
 - Legal entity: none
-- Funding: no VC, no corporate sponsor, no existing grants
+- Funding: independently funded, sustainable through OSS-aligned commercial services. No outside equity
 - Decision authority: single maintainer for merges, releases, and roadmap
 
 Solo maintenance is the norm in OSS, not the exception. What matters for adoption and for grant programs is whether bus factor, succession, and security disclosure have real mitigations.
